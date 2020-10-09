@@ -2296,7 +2296,7 @@ type FsiInteractiveChecker(legacyReferenceResolver,
             
             let backgroundDiagnostics = [| |]
             let reduceMemoryUsage = ReduceMemoryFlag.Yes
-            let assumeDotNetFramework = tcConfig.primaryAssembly = PrimaryAssembly.Mscorlib
+            let defaultToDotNetFramework = (tcConfig.primaryAssembly = PrimaryAssembly.Mscorlib)
 
             let applyCompilerOptions tcConfigB  = 
                 let fsiCompilerOptions = CompilerOptions.GetCoreFsiCompilerOptions tcConfigB 
@@ -2307,7 +2307,7 @@ type FsiInteractiveChecker(legacyReferenceResolver,
                     filename, sourceText, CodeContext.Editing,
                     tcConfig.useSimpleResolution, tcConfig.useFsiAuxLib,
                     tcConfig.useSdkRefs, new Lexhelp.LexResourceManager(),
-                    applyCompilerOptions, assumeDotNetFramework,
+                    applyCompilerOptions, defaultToDotNetFramework,
                     tryGetMetadataSnapshot=(fun _ -> None),
                     reduceMemoryUsage=reduceMemoryUsage,
                     dependencyProvider=tcImports.DependencyProvider)
