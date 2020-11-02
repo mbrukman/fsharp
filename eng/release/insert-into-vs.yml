@@ -53,6 +53,7 @@ stages:
       displayName: 'Insert VS Payload'
       inputs:
         # only auto-complete if the target branch is not `rel/*`
-        AutoCompletePR: ${{ not(contains(parameters.insertTargetBranch, 'rel/')) }}
+        #AutoCompletePR: ${{ not(contains(parameters.insertTargetBranch, 'rel/')) }}
+        AutoCompletePR: false
         LinkWorkItemsToPR: false
       condition: and(succeeded(), or(eq(variables['Build.SourceBranch'], '${{ parameters.componentBranchName }}'), eq(variables['Build.SourceBranch'], 'refs/heads/${{ parameters.componentBranchName }}')))
